@@ -1,18 +1,33 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <ProductCard
+      v-for="product in products"
+      :product="product"
+      :key="product.id"
+    />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+  import ProductCard from "@/components/ProductCard.vue";
+  import { mapState } from "vuex";
 
-export default {
-  name: "HomeView",
-  components: {
-    HelloWorld,
-  },
-};
+  export default {
+    name: "HomeView",
+    components: {
+      ProductCard,
+    },
+    computed: {
+      ...mapState(["products"]),
+    },
+  };
 </script>
+
+<style scoped>
+  .home {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+</style>
